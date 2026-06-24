@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # Servidor de Base de Datos aislado
+  db-postgres:
+    image: postgres:15-alpine
+    container_name: sgsss_postgres_container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: tu_contraseña
+      POSTGRES_DB: SGSSS_Pro
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - sgsss_network
+
+  # Contenedor para tu código Java
+  app-java:
+    build: .
+    container_name: sgsss_java_container
+    depends_on:
+      - db-postgres
+    stdin_open: true
+    tty: true
+    networks:
+      - sgsss_network
+
+volumes:
+  postgres_data:
+
+networks:
+  sgsss_network:
+    driver: bridge
