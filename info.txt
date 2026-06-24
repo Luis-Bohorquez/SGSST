@@ -1,0 +1,9 @@
+echo "# SGSST" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Luis-Bohorquez/SGSST.git
+git push -u origin main
+
+debes aprender el git para controlar tus proyectos a la perfeccion
